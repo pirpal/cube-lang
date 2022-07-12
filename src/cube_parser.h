@@ -7,17 +7,16 @@
 #include <stdint.h>
 
 
-typedef enum PrimitiveToken { // §
-  WORD, NUMBER, OPERATOR, SCOPE_OPEN, SCOPE_CLOSE, COMMENT
+typedef enum PrimitiveToken {
+  WORD, NUMBER, OPERATOR
 } PToken;
 
 
 //--------------------------------------------------------------
 // § Regex definitions
 //--------------------------------------------------------------
-// § primitive Tokens
+// Primitive Tokens
 
-// NUMBERS
 #define rgx_NUMBER "^-?([0-9]{1}|[1-9]{1}[0-9]+|[0-9]{1}.[0-9]+|[1-9]{1}[0-9]+.[0-9]+)$"
 //  -?                    : negative sign
 //  [0-9]{1}              : single digit integer
@@ -25,16 +24,16 @@ typedef enum PrimitiveToken { // §
 //  [0-9]{1}.[0-9]+       : single digit + decimal part
 //  [1-9]{1}[0-9]+.[0-9]+ : multi digits + decimal part
  
-// WORDS
 #define rgx_WORD "^[_:@]?([a-zA_Z]|[a-zA-Z_-]+)([0-9_:@]+)?$"
 // ^[_:@]?           : _RESERVED_KW_, _namespace_constant, :prefix_symb, @array 
 // [a-zA-Z]          : x, y, A, B
 // [a-zA-Z_-]+       : any upcase/downcase, with optional underscore or dash separator(s)
 // ([0-9]+|[_:@]+)?$ : varname1, suffix_symb:, ignore_if:, unless:, each @array:, array@0, array@_1
 
-// OPERATORS
-#define rgx_OPERATOR "^([-+*\/%=<>]|[-+\/\*=<>!]=)$"
+#define rgx_OPERATOR "^([-+*/%=<>]|[-+/*=<>!]=)$"
 // +, -, /, *, %, =, <, >, <=, >=, ==, !=,  +=, -=, *=, /=
+
+
 
 
 //--------------------------------------------------------------
@@ -44,6 +43,8 @@ typedef enum PrimitiveToken { // §
 bool is_word(const char *tok);
 
 bool is_number(const char *tok);
+
+bool is_operator(const char *tok);
 
 
 #endif // CUBE_PARSER_H_

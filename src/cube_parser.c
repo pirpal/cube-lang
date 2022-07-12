@@ -2,8 +2,7 @@
 #include <regex.h>
 
 
-// § CUBE_PARSE_REGEX.C
-
+// § CUBE_PARSER
 
 //--------------------------------------------------------------
 // $ Static functions
@@ -27,8 +26,7 @@ build_rgx (const char *regex) {
 
 
 static bool
-regex_match(regex_t *rgx, const char *str, uint8_t match_nb)
-{
+regex_match(regex_t *rgx, const char *str, uint8_t match_nb) {
   if ((regexec(rgx, str, match_nb, NULL, 0)) == 0) {
     return true;
   }
@@ -38,6 +36,7 @@ regex_match(regex_t *rgx, const char *str, uint8_t match_nb)
 //--------------------------------------------------------------
 // § Functions definitions
 //--------------------------------------------------------------
+
 bool
 is_word(const char *tok) {
   regex_t rgx = build_rgx(rgx_WORD);
@@ -55,3 +54,13 @@ is_number(const char *tok) {
   return res;
 }
 
+
+bool is_operator(const char *tok) {
+  regex_t rgx = build_rgx(rgx_OPERATOR);
+  bool res = regex_match(&rgx, tok, 0);
+  regfree(&rgx);
+  return res;
+}
+
+
+// CUBE_PARSER.C
