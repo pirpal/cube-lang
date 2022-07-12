@@ -2,7 +2,6 @@
 #include <regex.h>
 
 
-//--------------------------------------------------------------
 // § CUBE_PARSE_REGEX.C
 
 
@@ -56,11 +55,3 @@ is_number(const char *tok) {
   return res;
 }
 
-
-bool
-is_integer(const char *tok) {
-  regex_t rgx = build_rgx(rgx_NUMBER);
-  bool res = regex_match(&rgx, tok, 0);
-  regfree(&rgx);
-  return res;
-}

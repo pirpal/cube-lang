@@ -1,5 +1,5 @@
-#ifndef CUBE_PARSE_REGEX_H_
-#define CUBE_PARSE_REGEX_H_
+#ifndef CUBE_PARSER_H_
+#define CUBE_PARSER_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,26 +10,6 @@
 typedef enum PrimitiveToken { // §
   WORD, NUMBER, OPERATOR, SCOPE_OPEN, SCOPE_CLOSE, COMMENT
 } PToken;
-
-
-// $ Single non-alphanum characters definitions
-typedef enum SingleOtherChr { // §
-  oc_ACCESS, // 0
-  oc_AFFECT,
-  oc_ASSOC,
-  oc_CLOSE_BRA,
-  oc_CLOSE_CUR,
-  oc_CLOSE_PAR,
-  oc_DIV,
-  oc_DOT,
-  oc_MINUS,
-  oc_MOD,
-  oc_MULT,
-  oc_OPEN_BRA,
-  oc_OPEN_CUR,
-  oc_OPEN_PAR,
-  oc_PLUS // 14
-} SingleOtherChr;
 
 
 //--------------------------------------------------------------
@@ -57,15 +37,6 @@ typedef enum SingleOtherChr { // §
 // +, -, /, *, %, =, <, >, <=, >=, ==, !=,  +=, -=, *=, /=
 
 
-// TYPES
-#define rgx_LIST_T = "^\([A-Z][a-z]+\)$"
-
-#define rgx_VAR_NAME    "^[a-z]+(_[a-z]+)+*$"
-#define rgx_CONST_NAME1 "[A-Z]+(_[A-Z]+)+*"
-#define rgx_CONST_NAME2 "[A-Z]+(_[A-Z]+)+*"
-
-
-
 //--------------------------------------------------------------
 // § Functions prototypes
 //--------------------------------------------------------------
@@ -75,4 +46,4 @@ bool is_word(const char *tok);
 bool is_number(const char *tok);
 
 
-#endif // CUBE_PARSE_REGEX_H_
+#endif // CUBE_PARSER_H_
